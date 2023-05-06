@@ -5,11 +5,13 @@ const router = express.Router();
 const ctrl = require('../../controllers/auth-controllers')
 const { validateBody } = require('../../utils');
 const { userSchemasJoi } = require('../../utils');
-const { authentificate, upload } = require('../../middlewares')
-const { userSchemaJoi, updateSubscriptionSchema } = userSchemasJoi;
+const { authentificate, upload } = require('../../middlewares');
+const { userSchemaJoi, updateSubscriptionSchema, resendVerifyEmailSchema } = userSchemasJoi;
 
 //registration
 router.post('/register', validateBody(userSchemaJoi), ctrl.signUp);
+router.get('/verify/:verificationCode', ctrl.verify);
+router.post('/verify', validateBody(resendVerifyEmailSchema), ctrl.resendVerifyEmail);
 
 //login
 router.post('/login', validateBody(userSchemaJoi), ctrl.signIn);
