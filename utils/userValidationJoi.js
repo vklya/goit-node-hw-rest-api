@@ -17,11 +17,19 @@ const updateSubscriptionSchema = Joi.object({
         "any.required": "missing field subscription",
         "string.empty": "subscription field cannot be empty",
     }),
-})
+});
+
+const resendVerifyEmailSchema = Joi.object({
+    email: Joi.string().required().messages({
+        "any.required": "missing required email field",
+        "string.empty": "email field cannot be empty",
+    }),
+});
 
 const userSchemasJoi = {
     userSchemaJoi,
     updateSubscriptionSchema,
+    resendVerifyEmailSchema
 };
 
 module.exports = userSchemasJoi;
